@@ -1,0 +1,32 @@
+CREATE DATABASE `rszadaca` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+CREATE TABLE `ambulanta` (
+  `idambulanta` int NOT NULL AUTO_INCREMENT,
+  `adresa` varchar(45) NOT NULL,
+  PRIMARY KEY (`idambulanta`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `osoblje` (
+  `idosoblje` int NOT NULL AUTO_INCREMENT,
+  `ime` varchar(45) DEFAULT NULL,
+  `prezime` varchar(45) DEFAULT NULL,
+  `pozicija` varchar(45) DEFAULT NULL,
+  `idambulanta` int NOT NULL,
+  PRIMARY KEY (`idosoblje`),
+  KEY `idambulanta` (`idambulanta`),
+  CONSTRAINT `osoblje_ibfk_1` FOREIGN KEY (`idambulanta`) REFERENCES `ambulanta` (`idambulanta`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `raspored` (
+  `idraspored` int NOT NULL AUTO_INCREMENT,
+  `pon` varchar(45) DEFAULT NULL,
+  `uto` varchar(45) DEFAULT NULL,
+  `sri` varchar(45) DEFAULT NULL,
+  `cet` varchar(45) DEFAULT NULL,
+  `pet` varchar(45) DEFAULT NULL,
+  `idosoblje` int DEFAULT NULL,
+  PRIMARY KEY (`idraspored`),
+  KEY `idosoblje` (`idosoblje`),
+  CONSTRAINT `raspored_ibfk_1` FOREIGN KEY (`idosoblje`) REFERENCES `osoblje` (`idosoblje`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
